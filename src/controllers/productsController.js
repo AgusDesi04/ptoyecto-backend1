@@ -52,18 +52,8 @@ export const getProductsPaginated = async (req, res) => {
 export const findProductById = async (req, res) => {
   let { pid } = req.params
 
-  id = parseInt(pid, 10);
 
-  if (isNaN(id)) {
-    res.setHeader("content-type", "aplication/json")
-    return res.status(400).send("El id debe ser numerico!!")
-  }
-
-
-
-  let products = await ProductsManager.getProducts()
-
-  let product = products.find(p => p.id === id)
+  let product = await ProductsManager.getById(pid)
 
   if (!product) {
     res.setHeader("content-type", "aplication/json")
